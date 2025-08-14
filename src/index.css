@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitcount+Grid+Double:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 8rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn:active {
+  background-color: #ddd;
+}
+
+.btn {
+  transition: transform 0.8s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-hover {
+  transition: transform 0.2s ease;
+}
+
+.btn-hover:hover {
+  transform: scale(0.98);
+}

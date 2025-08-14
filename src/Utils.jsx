@@ -1,0 +1,64 @@
+export const  PreLoadWishList = () => {
+    import("./Pages/WishList/WishList")
+}
+
+export const PreLoadCart = () => {
+    import("./Pages/Cart/Cart")
+}
+
+export const navVariables = ["MEN", "WOMEN", "KIDS", "HOME", "BEAUTY", "GENZ", "STUDIO"]
+
+export const buildList = (item) => ({
+    id: item.id,
+    img: item.imgURIs[0],
+    name: item.name,
+    brand: item.brand,
+    discount: item.discount,
+    price: item.price,
+    rating: item.rating,
+    reviews: item.reviews,
+    quantity: 1,
+    liked: false,
+  });
+
+export const buildWishList = (item) => ({
+    id: item.id,
+    img: item.img,
+    name: item.name,
+    brand: item.brand,
+    discount: item.discount,
+    price: item.price,
+    rating: item.rating,
+    reviews: item.reviews,
+    quantity: 1,
+    liked: false,
+  });
+
+// For Product Page
+export const selectVisibleProducts = (state) => {
+
+  let products = state.Products.allproduct;
+  let searchTerm = state.Products.searchedProduct;
+  let sortedPrice = state.Products.SelectedPrice;
+  
+  if(searchTerm.trim()) {
+    products = products.filter((item) =>
+    item.brand.toLowerCase().includes(searchTerm.toLowerCase()))
+  }
+  
+  if(sortedPrice === 'lowtohigh') {
+    products = [...products].sort((a,b) => a.price - b.price)
+  } else if(sortedPrice === 'hightolow') {
+    products = [...products].sort((a,b) => b.price - a.price)
+  }
+  
+  return products;
+} 
+
+// For Login Page
+export const handleChange = (e, dispatcher, storeLoginDetails) => {
+  let {name, value} = e.target;
+  dispatcher(storeLoginDetails({name, value}))
+}
+
+

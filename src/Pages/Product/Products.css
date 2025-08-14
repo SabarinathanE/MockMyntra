@@ -1,0 +1,66 @@
+/* Men.css */
+
+.sidebar-filter {
+    position: fixed;
+    top: 150px;
+    left: 0;
+    height: calc(100vh - 30%);
+    width: 250px;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 0 0px 5px gray !important;
+  }
+
+.sidebar-filter h4{
+    color: black;
+}
+  
+.product-content {
+    margin-left: 250px; /* Same as sidebar width */
+    padding-top: 60px;
+}
+
+.add-btn{
+    background-color: rgb(229, 144, 70) !important;
+    border: none !important;
+}
+
+.card-body h6{
+    font-size: large;
+}
+
+.card-body p{
+    font-size:15px;
+    font-weight:lighter;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 14px;
+}
+
+.card-Rs{
+    font-weight:bold !important;
+}
+
+.cardss p{
+  width: fit-content;
+}
+
+.rating-icon{
+  transform: translateY(-15%);
+}
+
+.filter-toggle-button {
+    border-radius: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+  
+.filter-modal {
+    backdrop-filter: blur(4px);
+}
+
+@media (max-width: 770px) {
+    .product-content {
+        margin-left: 50px;
+    }
+}

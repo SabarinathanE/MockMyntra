@@ -1,0 +1,27 @@
+.container-err{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 128px);
+  }
+  
+  .container-err h1{
+    font-size: 75px;
+    font-weight: 700px;
+    margin: 0px;
+  }
+  
+  .container-err h4{
+    font-size: 35px;
+    margin-bottom: 15px;
+  }
+  
+  .container-err button{
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 1px black;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: pink;
+  }

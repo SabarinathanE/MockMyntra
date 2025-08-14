@@ -1,0 +1,22 @@
+.login-container{
+    height: calc(100vh - 128px);
+}
+
+.login-page{
+    border: 1px solid black;
+    box-shadow: 2px 2px 5px gray;
+    min-width: 400px;
+    padding: 70px 15px;
+}
+
+.login-btn{
+    background: rgb(232, 106, 196);
+    outline: none;
+    border: 0;
+    color: #fff;
+}
+
+.sign-in-btn{
+    background-color: #fff;
+    border: 2px solid rgb(160, 152, 152);
+}

@@ -59,6 +59,44 @@
     backdrop-filter: blur(4px);
 }
 
+.qty-buttons {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    overflow: hidden;
+    /* min-height:auto; */
+  }
+
+  .qty-buttons button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 3px 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .qty-buttons button:active {
+    background-color: #ddd;
+  }
+
+  .qty-count {
+    padding: 3px 6px;
+    min-width: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
+
+  .clear-btn button:hover{
+    transform:scale(1.03);
+  }
+
+  .clear-btn button{
+    transition: transform 0.3s ease;
+  }
+
 @media (max-width: 770px) {
     .product-content {
         margin-left: 50px;

@@ -5,7 +5,8 @@ const ProductSlice = createSlice({
   initialState: {
     allproduct: [],
     searchedProduct: "",
-    SelectedPrice: null
+    SelectedPrice: null,
+    SelectedCategory: []
   },
   reducers: {
     StoreProduct: (state, action) => {
@@ -20,22 +21,29 @@ const ProductSlice = createSlice({
     },
     sortSelected: (state, action) => {
       let type = action.payload.type;
-      state.SelectedPrice = (state.SelectedPrice === type) ? null : type
+      state.SelectedPrice = type
     },
-    // ChangeProductQuantity: (state, action) => {
-    //   if (action.payload) {
-    //     const countData = state.allproduct.find(
-    //       (count) => count.id === action.payload.content.id
-    //     );
-    //     if (countData && action.payload.type === "INC") {
-    //       countData.quantity += 1;
-    //     } else if (countData.quantity > 1) {
-    //       countData.quantity -= 1;
-    //     }
-    //   }
-    // },
+    ChangeProductQuantity: (state, action) => {
+      if (action.payload) {
+        const countData = state.allproduct.find(
+          (count) => count.id === action.payload.content.id
+        );
+        if (countData && action.payload.type === "INC") {
+          countData.quantity += 1;
+        } else if (countData.quantity > 1) {
+          countData.quantity -= 1;
+        }
+      }
+    },
+    ChangeCategory: (state, action) => {
+      if((state.SelectedCategory).includes(action.payload)) {
+        state.SelectedCategory = [...state.SelectedCategory].filter((f) => f !== action.payload)
+      } else {
+        state.SelectedCategory = [...state.SelectedCategory, action.payload]
+      }
+    }
   },
 });
 
-export const { StoreProduct, SearchProduct, sortSelected, ChangeProductQuantity } = ProductSlice.actions;
+export const { StoreProduct, SearchProduct, sortSelected, ChangeProductQuantity, ChangeCategory } = ProductSlice.actions;
 export default ProductSlice.reducer;

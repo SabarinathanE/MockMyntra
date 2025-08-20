@@ -27,7 +27,7 @@ function OrderedPage() {
               <div className="row g-0">
                 <div className="col-md-2">
                   <img
-                    src={item.img}
+                    src={item.imgURIs[0]}
                     className="img-fluid rounded-start"
                     alt={item.name}
                   />

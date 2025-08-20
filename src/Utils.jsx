@@ -14,6 +14,13 @@ export const selectVisibleProducts = (state) => {
   let products = state.Products.allproduct;
   let searchTerm = state.Products.searchedProduct;
   let sortedPrice = state.Products.SelectedPrice;
+  let SelectedCategory = state.Products.SelectedCategory;
+ 
+  // if(SelectedCategory.length === 0) {
+  //   products;
+  // } else if(SelectedCategory === 'Men') {
+  //   products = 
+  // }
   
   if(searchTerm.trim()) {
     products = products.filter((item) =>

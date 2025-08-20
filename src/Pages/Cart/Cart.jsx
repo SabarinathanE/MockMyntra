@@ -23,6 +23,8 @@ function Cart() {
   } = useSelector((state) => state.Cart);
   const { logos } = useSelector((state) => state.WishList);
 
+  console.log("cart",cart)
+
   useEffect(() => {
     if (cart.length > 0) {
       const total = cart.reduce(

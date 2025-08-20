@@ -8,32 +8,6 @@ export const PreLoadCart = () => {
 
 export const navVariables = ["MEN", "WOMEN", "KIDS", "HOME", "BEAUTY", "GENZ", "STUDIO"]
 
-export const buildList = (item) => ({
-    id: item.id,
-    img: item.imgURIs[0],
-    name: item.name,
-    brand: item.brand,
-    discount: item.discount,
-    price: item.price,
-    rating: item.rating,
-    reviews: item.reviews,
-    quantity: 1,
-    liked: false,
-  });
-
-export const buildWishList = (item) => ({
-    id: item.id,
-    img: item.img,
-    name: item.name,
-    brand: item.brand,
-    discount: item.discount,
-    price: item.price,
-    rating: item.rating,
-    reviews: item.reviews,
-    quantity: 1,
-    liked: false,
-  });
-
 // For Product Page
 export const selectVisibleProducts = (state) => {
 

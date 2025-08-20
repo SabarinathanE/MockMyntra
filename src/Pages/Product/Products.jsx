@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MyntraApi } from "../../Components/Axios/Api";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ChangeProductQuantity,
   SearchProduct,
   StoreProduct,
   sortSelected,
@@ -14,8 +15,8 @@ import {
   DeleteWithList,
   StoreWishList,
 } from "../../Redux/Recducer/WishListReducer";
-import { AddToCart } from "../../Redux/Recducer/CartReducer";
-import { buildList, selectVisibleProducts } from "../../Utils";
+import { AddToCart, ChangeQuantity } from "../../Redux/Recducer/CartReducer";
+import { selectVisibleProducts } from "../../Utils";
 import Navbar from "../../Components/Navbar/Navbar";
 
 function Products() {
@@ -26,7 +27,7 @@ function Products() {
   const { cart } = useSelector((state) => state.Cart);
   const [showFilter, setShowFilter] = useState(false);
   const products = useSelector((state) => selectVisibleProducts(state));
-
+console.log(products)
   useEffect(() => {
     const cartFetch = async () => {
       try {
@@ -168,14 +169,14 @@ function Products() {
                       <CiHeart
                         className="fs-4 bg-light rounded-1 shadow"
                         onClick={() =>
-                          dispatcher(StoreWishList(buildList(item)))
+                          dispatcher(StoreWishList((item)))
                         }
                       />
                     ) : (
                       <FaHeart
                         className="fs-5 text-danger"
                         onClick={() =>
-                          dispatcher(DeleteWithList(buildList(item)))
+                          dispatcher(DeleteWithList((item)))
                         }
                       />
                     )}
@@ -188,6 +189,31 @@ function Products() {
                     Rs. {item.price}{" "}
                     <span style={{ color: "red" }}>({item.discount}% OFF)</span>
                   </p>
+                  <div className="d-flex gap-2 align-items-center">
+                        <span className="fw-bold">Qty:</span>
+                        <div className="qty-buttons">
+                          <button
+                            onClick={() =>
+                              dispatcher(
+                                ChangeProductQuantity({ type: "DEC", content: item })
+                              )
+                           
+                             }
+                          >
+                            -
+                          </button>
+                          <div className="qty-count">{item.quantity}</div>
+                          <button
+                            onClick={() =>
+                              dispatcher(
+                                ChangeProductQuantity({ type: "INC", content: item })
+                              )
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
                   <div className="d-grid">
                     {cart.find((i) => i.id === item.id) ? (
                       <button disabled className="btn btn-secondary">
@@ -196,7 +222,7 @@ function Products() {
                     ) : (
                       <button
                         className="btn btn-primary add-btn"
-                        onClick={() => dispatcher(AddToCart(buildList(item)))}
+                        onClick={() => dispatcher(AddToCart((item)))}
                       >
                         Add to Cart
                       </button>

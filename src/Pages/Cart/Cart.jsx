@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ChangeQuantity,
   RemoveFromCart,
+  removeCart,
   setTotal,
 } from "../../Redux/Recducer/CartReducer";
 import Navbar from "../../Components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate()
   const dispatcher = useDispatch();
   const {
     cart,
@@ -36,6 +39,11 @@ function Cart() {
     }
   }, [cart]);
 
+  const placeOrder = () => {
+    navigate('/OrderedPlaced')
+    dispatcher(removeCart(cart))
+  }
+
   return (
     <>
     <Navbar />
@@ -53,7 +61,7 @@ function Cart() {
                   <div className="col-xxl-2 col-xl-3 col-lg-3 col-md-4">
                     <img
                     style={{width:'100%'}}
-                      src={item.img}
+                      src={item.imgURIs[0]}
                       className="img-fluid rounded-start"
                       alt={item.brand}
                     />
@@ -145,12 +153,13 @@ function Cart() {
                   </div>
                 </div>
               </div>
-              <div
-                style={{ background: "#fe386d", cursor: "pointer" }}
+              <button
+                style={{ background: "#fe386d", cursor: "pointer", border: 'none' }}
                 className="card-footer text-light text-center btn-hover"
+                onClick={placeOrder}
               >
                 Place Order
-              </div>
+              </button>
             </div>
           </div>
         </div>

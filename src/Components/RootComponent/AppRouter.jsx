@@ -1,16 +1,34 @@
 import React, { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Products from "../../Pages/Product/Products.jsx";
 import Login from "../../Pages/Login/Login.jsx";
 import App from "../../App.jsx";
 import Error from "../../Pages/Error/Error.jsx";
+import OrderedPage from "../../Pages/OrderedPage/OrderedPage.jsx";
 
 const WishList = lazy(() => import("../../Pages/WishList/WishList"));
+import { useEffect } from "react";
+import { MyntraApi } from "../Axios/Api.js";
+import { InsertLogo } from "../../Redux/Recducer/WishListReducer.jsx";
+
 const Cart = lazy(() => import("../../Pages/Cart/Cart"));
 
 function AppRouter() {
   const { loginState } = useSelector((state) => state.Login);
+
+  const dispatcher = useDispatch();
+  useEffect(() => {
+    const fetchWish = async () => {
+      try {
+        const res = await MyntraApi.get("/icons");
+        dispatcher(InsertLogo(res.data));
+      } catch (error) {
+        alert("Error in fetching");
+      }
+    };
+    fetchWish();
+  }, []);
 
   if (!loginState) {
     // User not logged in — only allow login route and redirect everything else to it
@@ -36,6 +54,7 @@ function AppRouter() {
       <Route path="/beauty" element={<Products />} />
       <Route path="/genz" element={<Products />} />
       <Route path="/studio" element={<Products />} />
+      <Route path="/OrderedPlaced" element={<OrderedPage />} />
 
       <Route
         path="/wishlist"

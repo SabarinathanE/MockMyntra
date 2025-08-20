@@ -3,14 +3,13 @@ import { IoStarSharp } from "react-icons/io5";
 import { DeleteWithList } from "../../Redux/Recducer/WishListReducer";
 import { AddToCart } from "../../Redux/Recducer/CartReducer";
 import "./WishList.css";
-import { buildWishList } from "../../Utils";
 import Navbar from "../../Components/Navbar/Navbar";
 
 function WishList() {
   const dispatcher = useDispatch();
   const { wishList, logos } = useSelector((state) => state.WishList);
   const { cart } = useSelector((state) => state.Cart);
-
+  console.log(logos[0].emptyCart)
   return (
     <>
       <Navbar />
@@ -25,7 +24,7 @@ function WishList() {
                 style={{ width: "18rem" }}
               >
                 <img
-                  src={item.img}
+                  src={item.imgURIs[0]}
                   className="card-img-top position-relative"
                   alt={item.name}
                 />
@@ -52,7 +51,7 @@ function WishList() {
                     ) : (
                       <button
                         className="btn btn-primary add-btn"
-                        onClick={() => dispatcher(AddToCart(buildWishList(item)))}
+                        onClick={() => dispatcher(AddToCart((item)))}
                       >
                         Add to Cart
                       </button>

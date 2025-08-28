@@ -21,7 +21,7 @@ import { selectVisibleProducts } from "../../Utils";
 import Navbar from "../../Components/Navbar/Navbar";
 
 function Products() {
-  const categories = ["Mens", "Womens", "Shoes"];
+  const categories = ["mens", "womens", "shoes"];
 
   const toggleCategory = (cat) => {
       dispatcher(ChangeCategory(cat));
@@ -33,7 +33,7 @@ function Products() {
   const { cart } = useSelector((state) => state.Cart);
   const [showFilter, setShowFilter] = useState(false);
   const products = useSelector((state) => selectVisibleProducts(state));
-  console.log("product", products);
+  console.log("product", products,"category", SelectedCategory);
 
   useEffect(() => {
     const cartFetch = async () => {
@@ -118,22 +118,23 @@ function Products() {
             <div className="clear-btn d-flex justify-content-between align-items-center">
               <h6 className="ps-2 mb-0">Categories:</h6>
               <button
-                onClick={() => dispatcher(sortSelected({ type: null }))}
+                onClick={() => dispatcher(ChangeCategory('clear'))}
                 className="border-0 rounded-2 text-secondary"
               >
-                Clear
+                Clears
               </button>
             </div>
           </div>
 
-      {categories.map((cat) => (
-                 <div className="d-flex align-items-center ps-2 column-gap-2 text-light mb-2">
+      {categories.map((cat,index) => (
+                 <div key={index} className="d-flex align-items-center ps-2 column-gap-2 text-light mb-2">
           <input
+          id={index}
             type="checkbox"
             checked={SelectedCategory.includes(cat)}
             onChange={() => toggleCategory(cat)}
           />
-                  <label key={cat}>{cat}</label>
+                  <label htmlFor={index} key={cat}>{cat}</label>
           
           </div>
       ))}
@@ -247,37 +248,12 @@ function Products() {
                       </span>
                     </p>
                     {/* <div className="d-grid"> */}
+
+                    <div className="d-grid">
                     {cart.find((i) => i.id === item.id) ? (
-                      <div className="d-flex gap-2 align-items-center">
-                        <span className="fw-bold">Qty:</span>
-                        <div className="qty-buttons">
-                          <button
-                            onClick={() =>
-                              dispatcher(
-                                ChangeProductQuantity({
-                                  type: "DEC",
-                                  content: item,
-                                })
-                              )
-                            }
-                          >
-                            -
-                          </button>
-                          <div className="qty-count">{item.quantity}</div>
-                          <button
-                            onClick={() =>
-                              dispatcher(
-                                ChangeProductQuantity({
-                                  type: "INC",
-                                  content: item,
-                                })
-                              )
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
+                      <button disabled className="btn btn-secondary">
+                        Added to Cart
+                      </button>
                     ) : (
                       <button
                         className="btn btn-primary add-btn"

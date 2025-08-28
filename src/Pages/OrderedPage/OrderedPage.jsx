@@ -15,6 +15,7 @@ function OrderedPage() {
             <h3 className="m-0" style={{ color: "#fe386d" }}>
               THANK YOU FOR THE ORDER !
             </h3>
+            <p className="m-0 p-0">You can See the Orders in <span style={{color: 'orange'}}>History Page</span></p>
           </div>
         </div>
         <div className="Ordered-Product p-3 border-secondary background-light rounded-3 mb-3">

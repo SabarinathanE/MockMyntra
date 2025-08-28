@@ -41,6 +41,10 @@ const ProductSlice = createSlice({
       } else {
         state.SelectedCategory = [...state.SelectedCategory, action.payload]
       }
+
+      if(action.payload === 'clear') {
+        state.SelectedCategory = []
+      }
     }
   },
 });

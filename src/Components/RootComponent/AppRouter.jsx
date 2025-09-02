@@ -11,6 +11,7 @@ const WishList = lazy(() => import("../../Pages/WishList/WishList"));
 import { useEffect } from "react";
 import { MyntraApi } from "../Axios/Api.js";
 import { InsertLogo } from "../../Redux/Recducer/WishListReducer.jsx";
+import OrderHistory from "../../Pages/OrderHistory/OrderHistory.jsx";
 
 const Cart = lazy(() => import("../../Pages/Cart/Cart"));
 
@@ -55,6 +56,7 @@ function AppRouter() {
       <Route path="/genz" element={<Products />} />
       <Route path="/studio" element={<Products />} />
       <Route path="/OrderedPlaced" element={<OrderedPage />} />
+      <Route path="/orderHistory" element={<OrderHistory />} />
 
       <Route
         path="/wishlist"

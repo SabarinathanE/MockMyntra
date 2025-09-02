@@ -22,8 +22,7 @@ function Cart() {
     deliveryCharges,
   } = useSelector((state) => state.Cart);
   const { logos } = useSelector((state) => state.WishList);
-
-  console.log("cart",cart)
+  console.log(cart)
 
   useEffect(() => {
     if (cart.length > 0) {

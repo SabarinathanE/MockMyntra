@@ -9,7 +9,7 @@ function WishList() {
   const dispatcher = useDispatch();
   const { wishList, logos } = useSelector((state) => state.WishList);
   const { cart } = useSelector((state) => state.Cart);
-  console.log(logos[0].emptyCart)
+
   return (
     <>
       <Navbar />

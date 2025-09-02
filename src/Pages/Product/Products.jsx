@@ -16,7 +16,7 @@ import {
   DeleteWithList,
   StoreWishList,
 } from "../../Redux/Recducer/WishListReducer";
-import { AddToCart, ChangeQuantity } from "../../Redux/Recducer/CartReducer";
+import { AddToCart } from "../../Redux/Recducer/CartReducer";
 import { selectVisibleProducts } from "../../Utils";
 import Navbar from "../../Components/Navbar/Navbar";
 
@@ -264,7 +264,7 @@ function Products() {
                     )}
                   </div>
                 </div>
-                // </div>
+                 </div>
               ))}
             </div>
           </div>

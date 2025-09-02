@@ -25,6 +25,7 @@ console.log(ShippedCart)
                   THANK YOU FOR THE ORDER !
                 </h3>
                 <p className="m-0 p-0">You can See the Orders in <span style={{color: 'orange'}}><Link to='/orderHistory'>History Page</Link></span></p>
+                <p className="m-0 p-0">Return to <span style={{color: 'orange'}}><Link to='/'>Home Page</Link></span></p>
               </div>
             </div>
             <div className="Ordered-Product p-3 border-secondary background-light rounded-3 mb-3">

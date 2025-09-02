@@ -4,8 +4,11 @@ import { DeleteWithList } from "../../Redux/Recducer/WishListReducer";
 import { AddToCart } from "../../Redux/Recducer/CartReducer";
 import "./WishList.css";
 import Navbar from "../../Components/Navbar/Navbar";
+import { ToastContainer } from "react-bootstrap";
+import { useToaster } from "../../CustomHook/Toast/ToastHook";
 
 function WishList() {
+  const { showToast, ToastContainer } = useToaster();
   const dispatcher = useDispatch();
   const { wishList, logos } = useSelector((state) => state.WishList);
   const { cart } = useSelector((state) => state.Cart);
@@ -51,14 +54,20 @@ function WishList() {
                     ) : (
                       <button
                         className="btn btn-primary add-btn"
-                        onClick={() => dispatcher(AddToCart((item)))}
+                        onClick={() => 
+                          {dispatcher(AddToCart((item)))
+                          showToast("Added to Cart!", "success")}
+                        }
                       >
                         Add to Cart
                       </button>
                     )}
                     <button
                       className="btn btn-primary add-btn"
-                      onClick={() => dispatcher(DeleteWithList(item))}
+                      onClick={() => 
+                        {dispatcher(DeleteWithList(item))
+                        showToast("Removed!", "success")}
+                      }
                     >
                       Remove
                     </button>
@@ -76,6 +85,7 @@ function WishList() {
           <img src={logos[0].emptyCart} alt="" />
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }

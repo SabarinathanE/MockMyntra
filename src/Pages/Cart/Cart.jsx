@@ -9,8 +9,10 @@ import {
 } from "../../Redux/Recducer/CartReducer";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useToaster } from "../../CustomHook/Toast/ToastHook";
 
 function Cart() {
+  const { showToast, ToastContainer } = useToaster();
   const navigate = useNavigate()
   const dispatcher = useDispatch();
   const {
@@ -41,6 +43,7 @@ function Cart() {
   }, [cart]);
 
   const placeOrder = () => {
+    showToast("Order Placed!", "success")
     navigate('/OrderedPlaced')
     dispatcher(removeCart(cart))
   }
@@ -74,7 +77,10 @@ function Cart() {
                         <button
                           style={{ background: "#fe386d", color: "#fff" }}
                           className="border-0 rounded-1 btn-hover mb-2"
-                          onClick={() => dispatcher(RemoveFromCart(item))}
+                          onClick={() => 
+                            {dispatcher(RemoveFromCart(item))
+                            showToast("Removed!", "success")}
+                          }
                         >
                           Remove
                         </button>
@@ -174,6 +180,7 @@ function Cart() {
         </div>
       )}
     </div>
+    <ToastContainer />
     </>
   );
 }

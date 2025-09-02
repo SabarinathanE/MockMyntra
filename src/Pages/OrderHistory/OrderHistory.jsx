@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../../Components/Navbar/Navbar';
 import './OrderHistory.css'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function OrderHistory() {
 
@@ -19,7 +20,10 @@ function OrderHistory() {
         <img src={logos[0].emptyCart} alt="" />
       </div> : 
               <div className='container d-flex flex-column justify-content-center align-items-start'>
-              <h2 className=''>Your Orders!</h2>
+                <div className='w-100 d-flex justify-content-between align-items-center'>
+                <h2 className=''>Your Orders!</h2>
+                <p className="m-0 p-0">Return to <span><Link style={{color: 'orange'}} to='/'>Home Page</Link></span></p>
+                </div>
               <table>
                   <thead>
                       <tr style={{background: 'pink'}}>

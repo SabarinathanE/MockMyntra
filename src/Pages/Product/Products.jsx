@@ -19,9 +19,11 @@ import {
 import { AddToCart } from "../../Redux/Recducer/CartReducer";
 import { selectVisibleProducts } from "../../Utils";
 import Navbar from "../../Components/Navbar/Navbar";
+import { useToaster } from "../../CustomHook/Toast/ToastHook";
 
 function Products() {
   const categories = ["mens", "womens", "shoes"];
+  const { showToast, ToastContainer } = useToaster();
 
   const toggleCategory = (cat) => {
       dispatcher(ChangeCategory(cat));
@@ -78,7 +80,10 @@ function Products() {
             <div className="clear-btn d-flex justify-content-between align-items-center">
               <h6 className="ps-2 mb-0">Sort By Price:</h6>
               <button
-                onClick={() => dispatcher(sortSelected({ type: null }))}
+                onClick={() => 
+                  {dispatcher(sortSelected({ type: null }))
+                  showToast("Cleared!", "success")}
+                }
                 className="border-0 rounded-2 text-secondary"
               >
                 Clear
@@ -114,17 +119,23 @@ function Products() {
               border: "none", // remove default border
             }}
           />
+
+          {/* Category Filter */}
           <div className="d-flex flex-column row-gap-2 p-0 mt-3 mb-2 text-light">
             <div className="clear-btn d-flex justify-content-between align-items-center">
               <h6 className="ps-2 mb-0">Categories:</h6>
               <button
-                onClick={() => dispatcher(ChangeCategory('clear'))}
+                onClick={() => 
+                  {dispatcher(ChangeCategory('clear'))
+                  showToast("Cleared!", "success")}
+                }
                 className="border-0 rounded-2 text-secondary"
               >
-                Clears
+                Clear
               </button>
             </div>
           </div>
+
 
       {categories.map((cat,index) => (
                  <div key={index} className="d-flex align-items-center ps-2 column-gap-2 text-light mb-2">
@@ -143,7 +154,7 @@ function Products() {
         {/* Modal-style filter for small screens */}
         {showFilter && (
           <div
-            className="filter-modal d-md-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex justify-content-center align-items-center"
+            className="filter-modal d-md-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex flex-column justify-content-center align-items-center"
             style={{ zIndex: 1055 }}
           >
             {" "}
@@ -165,7 +176,10 @@ function Products() {
                 <div className="d-flex justify-content-between align-items-center">
                   <h6 className="ps-2">Sort By Price:</h6>
                   <button
-                    onClick={() => dispatcher(sortSelected({ type: null }))}
+                    onClick={() => 
+                      {dispatcher(sortSelected({ type: null }))
+                      showToast("Cleared!", "success")}
+                    }
                     className="ps-2 border-0 rounded-2 text-dark"
                   >
                     Clear
@@ -200,10 +214,43 @@ function Products() {
                   <label htmlFor="lowtohigh">Low-to-High</label>
                 </div>
               </div>
+              <hr />
+                          <div>
+            <div className="d-flex flex-column row-gap-2 p-0 mt-3 mb-2 text-dark">
+            <div className="clear-btn d-flex justify-content-between align-items-center">
+              <h6 className="ps-2 mb-0">Categories:</h6>
+              <button
+                onClick={() => 
+                  {dispatcher(ChangeCategory('clear'))
+                  showToast("Cleared!", "success")}
+                }
+                className="border-0 rounded-2 text-dark"
+              >
+                Clear
+              </button>
             </div>
           </div>
+
+
+      {categories.map((cat,index) => (
+                 <div key={index} className="d-flex align-items-center ps-2 column-gap-2 text-dark mb-2">
+          <input
+          id={index}
+            type="checkbox"
+            checked={SelectedCategory.includes(cat)}
+            onChange={() => toggleCategory(cat)}
+          />
+                  <label htmlFor={index} key={cat}>{cat}</label>
+          
+          </div>
+      ))}
+            </div>
+            </div>
+
+
+          </div>
         )}
-        <div className="product-content text-white p-3 z-2">
+        <div className="product-content text-white p-3">
           <div className="container text-start justify-content-center">
             <div className="row justify-content-sm-center g-3 column-gap-3 justify-content-lg-start">
               {products.map((item, index) => (
@@ -228,7 +275,8 @@ function Products() {
                       {!wishList.find((i) => i.id === item.id) ? (
                         <CiHeart
                           className="fs-4 bg-light rounded-1 shadow"
-                          onClick={() => dispatcher(StoreWishList(item))}
+                          onClick={() => {dispatcher(StoreWishList(item))
+                            showToast("Added to WishList!", "success")}}
                         />
                       ) : (
                         <FaHeart
@@ -257,7 +305,10 @@ function Products() {
                     ) : (
                       <button
                         className="btn btn-primary add-btn"
-                        onClick={() => dispatcher(AddToCart(item))}
+                        onClick={() => 
+                          {dispatcher(AddToCart(item))
+                          showToast("Added to Cart!", "success")}
+                        }
                       >
                         Add to Cart
                       </button>
@@ -270,6 +321,7 @@ function Products() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
